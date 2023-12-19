@@ -1,0 +1,15 @@
+package define
+
+const (
+	ENV_YI_ENDPOINT   = "YI_ENDPOINT"
+	ENV_YI_API_VER    = "YI_API_VER"
+	ENV_YI_API_KEY    = "YI_API_KEY"
+	ENV_YI_MODEL_NAME = "yi-34b-chat"
+
+	ENV_YI_HTTP_PROXY  = "YI_HTTP_PROXY"
+	ENV_YI_SOCKS_PROXY = "YI_SOCKS_PROXY"
+)
+
+const (
+	REST_API_VERSION = "/v1"
+)

@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+  yi-openai-proxy:
+    image: soulteary/yi-openai-proxy:v1.0.0
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      # 推荐使用“无痛”的变量来配置你的程序
+      - TZ=Asia/Shanghai
+      # 使用 Yi 社区提供的 API URL
+      - YI_ENDPOINT=https://YI Endpoint>/
+      # 使用 Yi 社区提供的 API Key
+      - YI_API_KEY=<YI API Key>
+      # 使用 Yi 社区提供的 Model Name。可选，默认为 "yi-34b-chat"
+      - YI_MODEL_NAME=<YI Model Name>
