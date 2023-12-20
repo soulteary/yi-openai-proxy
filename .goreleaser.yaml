@@ -14,7 +14,7 @@ builds:
       - darwin
     goarch:
       - amd64
-    main: ./cmd
+    main: ./main.go
     binary: yi-openai-proxy
     flags:
       - -trimpath
