@@ -2,12 +2,11 @@
 
 Yi OpenAI Proxy，将零一万物 YI-34B 模型 API 转换为各种使用 OpenAI API 的开源软件支持的格式，无需修改开源软件配置或代码。
 
+10 来 MB 的小工具，让你几乎无成本的使用各种 AI 应用。
+
 *只需要配置两个环境变量，一键启动，开始畅玩 AI Native 应用🚀。*
 
-项目借鉴和修改自下面两个项目，感谢 ❤️：
-
-- [stulzq/azure-openai-proxy](https://github.com/stulzq/azure-openai-proxy)。
-- [soulteary/azure-openai-proxy](https://github.com/soulteary/azure-openai-proxy)。
+<img src=".github/dockerhub.png">
 
 ## 当前验证可玩开源项目（持更，欢迎 PR）
 
@@ -102,27 +101,28 @@ services:
     ports:
       - 3000:3000
     environment:
-      API_KEY: <Azure OpenAI API Key>
-      BASE_URL: http://azure-openai:8080
+      API_KEY: <Yi API Key>
+      BASE_URL: http://yi-openai-proxy:8080
       CODE: ""
       HIDE_USER_API_KEY: 1
       HIDE_BALANCE_QUERY: 1
     depends_on:
-      - azure-openai
+      - yi-openai-proxy
     links:
-      - azure-openai
+      - yi-openai-proxy
     networks:
       - chatgpt-ns
 
-  azure-openai:
-    image: soulteary/azure-openai-proxy:1.2.0
+  yi-openai-proxy:
+    image: soulteary/yi-openai-proxy:v1.0.0
+    restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
     environment:
-      YI_ENDPOINT: <Azure OpenAI API Endpoint>
-      YI_MODEL_MAPPER: <Azure OpenAI API Deployment Mapper>
-      YI_MODEL_MAPPER: gpt-4:gpt-4,gpt-3.5-turbo:gpt-35-turbo
-      YI_API_VER: 2023-07-01-preview
+      # 使用以 `https://` 开头的 YI-34B API 地址
+      - YI_ENDPOINT=https://<YI_API_URL>
+      # 如果你定义了这个参数，那么你的程序在调用 “API” 的时候，就不需要携带 KEY 的内容了，或者随意写都行，这样就不会把 KEY 泄漏给应用了。更方便，也更安全。
+      - YI_API_KEY=<YI API Key>
     networks:
       - chatgpt-ns
 
@@ -135,14 +135,6 @@ networks:
 
 ChatGPT Web: https://github.com/Chanzhaoyu/chatgpt-web
 
-![chatgpt-web](assets/images/chatgpt-web.png)
-
-Envs:
-
-- `API_KEY` Azure OpenAI API Key
-- `YI_ENDPOINT` Azure OpenAI API Endpoint
-- `YI_MODEL_MAPPER` Azure OpenAI API Deployment Name Mappings
-
 docker-compose.yml:
 
 ````yaml
@@ -154,27 +146,29 @@ services:
     ports:
       - 3002:3002
     environment:
-      API_KEY: <Azure OpenAI API Key>
-      API_BASE_URL: http://azure-openai:8080
+      API_KEY: <Yi API Key>
+      API_BASE_URL: http://yi-openai-proxy:8080
       # API_MODEL: gpt-4
       AUTH_SECRET_KEY: ""
       MAX_REQUEST_PER_HOUR: 1000
       TIMEOUT_MS: 60000
     depends_on:
-      - azure-openai
+      - yi-openai-proxy
     links:
-      - azure-openai
+      - yi-openai-proxy
     networks:
       - chatgpt-ns
 
-  azure-openai:
-    image: soulteary/azure-openai-proxy:1.2.0
+  yi-openai-proxy:
+    image: soulteary/yi-openai-proxy:v1.0.0
+    restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
     environment:
-      YI_ENDPOINT: <Azure OpenAI API Endpoint>
-      YI_MODEL_MAPPER: <Azure OpenAI API Deployment Mapper>
-      YI_API_VER: 2023-07-01-preview
+      # 使用以 `https://` 开头的 YI-34B API 地址
+      - YI_ENDPOINT=https://<YI_API_URL>
+      # 如果你定义了这个参数，那么你的程序在调用 “API” 的时候，就不需要携带 KEY 的内容了，或者随意写都行，这样就不会把 KEY 泄漏给应用了。更方便，也更安全。
+      - YI_API_KEY=<YI API Key>
     networks:
       - chatgpt-ns
 
@@ -183,6 +177,9 @@ networks:
     driver: bridge
 ````
 
+## 感谢
 
+项目借鉴和修改自下面两个项目，感谢 `stulzq` 的创意 ❤️：
 
-
+- [stulzq/azure-openai-proxy](https://github.com/stulzq/azure-openai-proxy)。
+- [soulteary/azure-openai-proxy](https://github.com/soulteary/azure-openai-proxy)。
