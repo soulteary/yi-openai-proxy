@@ -8,6 +8,8 @@ Yi OpenAI Proxy，将零一万物 YI-34B 模型 API 转换为各种使用 OpenAI
 
 <img src=".github/dockerhub.png">
 
+[请前往新项目](https://github.com/soulteary/amazing-openai-api)，同时支持多种模型 🎉
+
 ## 当前验证可玩开源项目（持更，欢迎 PR）
 
 | 开源项目                                                  | 适配状态 |
