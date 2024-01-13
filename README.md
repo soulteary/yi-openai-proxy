@@ -1,5 +1,7 @@
 # YI OpenAI Proxy
 
+**推荐使用新项目，包含更多的模型 [https://github.com/soulteary/amazing-openai-api](https://github.com/soulteary/amazing-openai-api)**
+
 Yi OpenAI Proxy，将零一万物 YI-34B 模型 API 转换为各种使用 OpenAI API 的开源软件支持的格式，无需修改开源软件配置或代码。
 
 10 来 MB 的小工具，让你几乎无成本的使用各种 AI 应用。
